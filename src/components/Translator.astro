@@ -1,0 +1,58 @@
+---
+// No necesitamos importar nada especial aquí
+---
+
+<form id="translator-form">
+    <div>
+        <label>Frase:</label>
+        <input type="text" id="word-input" required />
+    </div>
+    <div>
+        <label>Idioma:</label>
+        <select id="language-select">
+            <option value="es">Español</option>
+            <option value="en">Inglés</option>
+            <option value="fr">Francés</option>
+            <!-- Agrega más idiomas si lo deseas -->
+        </select>
+    </div>
+    <button type="submit">Traducir</button>
+</form>
+
+<div id="translation-result" style="display:none;">
+    <h2>Traducción:</h2>
+    <p id="translation-text"></p>
+</div>
+
+<!-- Agregamos un script para manejar la interactividad -->
+<script>
+    const form = document.querySelector("#translator-form");
+    const translationResult = document.querySelector("#translation-result");
+    const translationText = document.querySelector("#translation-text");
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const word = document.querySelector("#word-input").value;
+        const language = document.querySelector("#language-select").value;
+
+        // Realizamos la petición a la API
+        const response = await fetch("/api/translate", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ word, language }),
+        });
+
+        const data = await response.json();
+
+        if (data.translation) {
+            translationText.textContent = data.translation;
+            translationResult.style.display = "block";
+        } else {
+            translationText.textContent = "Error en la traducción.";
+            translationResult.style.display = "block";
+        }
+    });
+</script>

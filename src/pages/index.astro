@@ -1,16 +1,35 @@
 ---
-
+import Translator from "../components/Translator.astro";
 ---
 
-<html lang="en">
+<style>
+	.text-center {
+		text-align: center;
+		margin-top: 20px;
+		font-style: italic;
+	}
+</style>
+
+<html lang="es">
 	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Traductor con OpenAI</title>
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+		/>
 	</head>
 	<body>
-		<h1>Astro</h1>
+		<header class="container text-center">
+			<h1>Traductor de Palabras con OpenAI</h1>
+		</header>
+		<main>
+			<section class="container">
+				<article>
+					<Translator />
+				</article>
+			</section>
+		</main>
 	</body>
 </html>
